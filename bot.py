@@ -5,18 +5,13 @@ from pyrogram import Client, filters,enums
 from pyrogram.types import (Message,InlineKeyboardMarkup,InlineKeyboardButton) 
 
 # Create a Pyrogram client object
-<<<<<<< HEAD
+
 API_ID = Config.API_ID
 API_HASH = Config.API_HASH
 BOT_TOKEN = Config.BOT_TOKEN
 HOME_TEXT=Config.HOME_TEXT
 app = Client('my_bot', api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
-=======
-api_id = ""
-api_hash = ''
-bot_token = ''
-app = Client('my_bot', api_id, api_hash, bot_token=bot_token)
->>>>>>> 71445f66fd4c581e1d3988dc0e830fdd6af9a272
+
 
 # Define a handler function to respond to /start command
 @app.on_message(filters.command('start'))
