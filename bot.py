@@ -1,23 +1,43 @@
 import pytube 
 import os
+from config import Config
 from pyrogram import Client, filters,enums
-from pyrogram.types import Message 
+from pyrogram.types import (Message,InlineKeyboardMarkup,InlineKeyboardButton) 
 
 # Create a Pyrogram client object
-api_id = ''
-api_hash = ''
-bot_token = ''
-app = Client('my_bot', api_id, api_hash, bot_token=bot_token)
+API_ID = Config.API_ID
+API_HASH = Config.API_HASH
+BOT_TOKEN = Config.BOT_TOKEN
+HOME_TEXT=Config.HOME_TEXT
+app = Client('my_bot', api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 
 # Define a handler function to respond to /start command
 @app.on_message(filters.command('start'))
 def start_handler(client, message):
-    message.reply_text('Send me a YouTube link to download.')
+    message.reply_text(
+          HOME_TEXT.format(message.from_user.first_name, message.from_user.id),
+            disable_web_page_preview=True,
+            reply_markup=InlineKeyboardMarkup(
+                [
+                    [
+                        InlineKeyboardButton("Support Group 🥺", url="https://telegram.me/Joint0T"),
+                        InlineKeyboardButton("Bots Channel 🙂", url="https://telegram.me/bot_channelv1")
+                    ],
+                    [
+                        InlineKeyboardButton("Get My Repo🙌", url="https://github.com/Rudraa332/Pytube-Telegram-Bot")
+                    ]
+                    # [
+                    #     InlineKeyboardButton("About Bot", callback_data="aboutbot"),
+                    #     InlineKeyboardButton("About Dev", callback_data="aboutdevs")
+                    # ]
+                ]
+            )
+    )
 
 # Define a handler function to respond to text messages containing a YouTube link
 # @app.on_message(filters.text & filters.private)
 # async def youtube_handler(client, message: Message):
-@app.on_message(filters.regex(".*(youtube.com/|youtu.be/).*"))
+@app.on_message(filters.regex(".*(youtube.com/|youtu.be/).*") &filters.private)
 async def handle_message(client, message: Message):
         # Create a YouTube object and get the highest resolution stream
         yt = pytube.YouTube(message.text)
