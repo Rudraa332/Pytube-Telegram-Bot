@@ -4,9 +4,9 @@ from pyrogram import Client, filters,enums
 from pyrogram.types import Message 
 
 # Create a Pyrogram client object
-api_id = 9126459
-api_hash = '238c912d48a9ec0d0e8b05738f358ffc'
-bot_token = '5835101866:AAHxF8vWL20cEYxVWjRiULWtQ2RWLgQcYio'
+api_id = ''
+api_hash = ''
+bot_token = ''
 app = Client('my_bot', api_id, api_hash, bot_token=bot_token)
 
 # Define a handler function to respond to /start command
